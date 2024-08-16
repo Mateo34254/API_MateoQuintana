@@ -5,6 +5,9 @@ switch ($function) {
     case "guardarProducto":
        guardarProducto();
         break;
+        case"actualizarProducto":
+            actualizarProducto();
+            break;
     }
 
     function guardarProducto()
@@ -18,4 +21,9 @@ switch ($function) {
 
         $resultado = (new producto())->guardarProductoModel($id, $precio, $titulo, $foto, $producto, $link);
         echo json_encode($resultado);
+    }
+    function actualizarProducto(){
+        $id = $_POST['id'];
+        $resultado = (new producto())->actualizarProductoModel($id);
+        
     }

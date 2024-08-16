@@ -18,7 +18,7 @@ window.onload = async ()=>{
 
                 <td>${producto.title}</td>
                 <td>${producto.permalink}</td>
-                <td>${producto.thumbnail}</td>
+                <td><img src="${producto.thumbnail}"></td>
                 <td>${producto.price}</td>        
         `;
         let button = document.createElement("button");
@@ -34,6 +34,8 @@ window.onload = async ()=>{
  }
 
  function guardarProductos(producto){
+    console.log(productos);
+    let url = "";
     let formData = new FormData();
     formData.append("nombre",producto.title);
     
