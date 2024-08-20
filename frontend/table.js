@@ -17,7 +17,7 @@ window.onload = async ()=>{
         tr.innerHTML+= `
 
                 <td>${producto.title}</td>
-                <td>${producto.permalink}</td>
+                <td><a href = "${producto.permalink}">Entra aqui</td>
                 <td><img src="${producto.thumbnail}"></td>
                 <td>${producto.price}</td>        
         `;
@@ -31,12 +31,25 @@ window.onload = async ()=>{
     });
 
 
- }
+ 
 
- function guardarProductos(producto){
+  async function  guardarProductos(productos){
     console.log(productos);
-    let url = "";
+    let url = "http://localhost/API_MateoQuintana/backend/controller/controller.php?funcion=guardarProducto";
     let formData = new FormData();
-    formData.append("nombre",producto.title);
-    
+
+    formData.append("id",productos.id);
+    formData.append("titulo",productos.title);
+    formData.append("link",productos.permalink);
+    formData.append("foto",productos.thumbnail);
+    formData.append("precio",productos.price);
+
+    let config = {
+        method:'post',
+        body: formData
+    }
+    let respuesta = await fetch(url,config);
+    let rec = await respuesta.json();
+    console.log(rec);
  }
+}
