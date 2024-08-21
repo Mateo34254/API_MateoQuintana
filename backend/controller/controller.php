@@ -13,12 +13,12 @@ switch ($function) {
     function guardarProducto(){
     
         $id = $_POST['id'];
-    $title = $_POST['title'];
-    $permalink = $_POST['link'];
-    $thumbnail = $_POST['img'];
-    $price = $_POST['price'];
+        $title = $_POST['title'];
+        $permalink = $_POST['link'];
+        $thumbnail = $_POST['img'];
+        $price = $_POST['price'];
 
-    $producto = (new producto())->guardarProductoModel($id, $title, $permalink, $thumbnail, $price);
-    echo json_encode($producto);
+    $resultado = (new producto())->guardarProductoModel($id, $title, $permalink, $thumbnail, $price);
+    echo json_encode($resultado);
 }
     

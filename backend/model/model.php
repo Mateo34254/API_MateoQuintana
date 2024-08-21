@@ -1,35 +1,27 @@
 <?php
+    require_once "../Connection/Connection.php";
 
 
-require_once "../connection/Connection.php";
-
-class producto{
-
-
-    function productoExiste($id) {
-        $conection = connection();
-        $sql = "SELECT id FROM articulos WHERE id = '$id'";
-        $resultado = $conection->query($sql);
-        return $resultado->num_rows > 0;
-    }
-
-    function guardarProductoModel($id, $title, $permalink, $thumbnail, $price){
-            $conection = connection();
-
-            if ($this->productoExiste($id)) {
-                $this->actualizarProductoModel($id, $title, $permalink, $thumbnail, $price);
-
-            } else {
-                $sql = "INSERT INTO articulos VALUES ('$id', '$title', '$permalink', '$thumbnail', $price)";
-                $respuesta = $conection->query($sql);
-                return $respuesta;
+    class producto{
+        function guardarProductoModel($id, $title, $permalink, $thumbnail, $price) 
+        {
+             $sql = "INSERT INTO articulos(id, title, permalink, thumbnail, price) VALUES('$id', '$title', '$permalink', '$thumbnail', '$price');";
+             $connection = connection();
+             $respuesta = $connection->query($sql);
+             return $respuesta;
+             if ($respuesta == false){
+                if ($connection->errno == 1060){
+                    $respuesta=$this->actualizarProductoModel($id, $title, $permalink, $thumbnail, $price);
+                    
+                }
             }
-}
+        }
 
-    public function actualizarProductoModel($id, $title, $permalink, $thumbnail, $price){
-        $sql = "UPDATE articulos SET titulo= '$title', link= '$permalink', foto ='$thumbnail', precio= '$price' where id = '$id'";
-        $connection= connection();
-        $respuesta = $connection->query($sql);
+    function actualizarProductoModel($id, $title, $permalink, $thumbnail, $price){
+
+        $conection = connection();
+        $sql = "UPDATE articulos SET titulo = '$title', permalink = '$permalink', thumbnail = '$thumbnail', price = '$price' WHERE id = '$id'";
+        $respuesta = $conection->query($sql);
         return $respuesta;
-    }
+}
 }
