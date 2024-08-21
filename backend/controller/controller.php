@@ -1,4 +1,7 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+
+require_once "../model/model.php";
 $function = $_GET['funcion'];
 
 switch ($function) {
@@ -10,12 +13,12 @@ switch ($function) {
     function guardarProducto(){
     
         $id = $_POST['id'];
-        $titulo = $_POST['titulo'];
-        $link = $_POST['link'];
-        $foto = $_POST['foto'];
-        $precio = $_POST['precio'];
+    $title = $_POST['title'];
+    $permalink = $_POST['link'];
+    $thumbnail = $_POST['img'];
+    $price = $_POST['price'];
 
-        $resultado = (new producto())->guardarProductoModel($id, $titulo, $link, $foto, $precio);
-        echo json_encode($resultado);
-    }
+    $producto = (new producto())->guardarProductoModel($id, $title, $permalink, $thumbnail, $price);
+    echo json_encode($producto);
+}
     
